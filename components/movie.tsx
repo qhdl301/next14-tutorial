@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import styles from "../styles/movie.module.css";
 import { useRouter } from "next/navigation";
 
@@ -14,7 +15,7 @@ export default function Movie({ index, title, id, poster_path }: IMovieProps) {
   const router = useRouter();
 
   const onClick = () => {
-    router.prefetch(`/movies/${id}`);
+    router.push(`/movies/${id}`);
   };
 
   return (
@@ -25,7 +26,9 @@ export default function Movie({ index, title, id, poster_path }: IMovieProps) {
       onClick={onClick}
     >
       <img src={poster_path} alt={title} />
-      <h3>{title}</h3>
+      <Link prefetch href={`/movies/${id}`}>
+        {title}
+      </Link>
     </div>
   );
 }
